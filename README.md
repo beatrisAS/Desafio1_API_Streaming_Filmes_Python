@@ -328,6 +328,6 @@ As ideias abaixo são **sugestões futuras**, não funcionalidades implementadas
 ---
 
 <div align="center">
-  Projeto de estudo desenvolvido no contexto de um bootcamp de Análise de Dados. 
+  Projeto de estudo desenvolvido no contexto do bootcamp de Analista de Dados da Generation Brasil.
 </div>
 
