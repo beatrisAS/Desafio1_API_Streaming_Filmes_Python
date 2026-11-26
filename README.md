@@ -43,7 +43,7 @@ O terceiro desafio explora a construção de um relatório analítico no Excel W
 
 O projeto utiliza registros fictícios de visualização para responder a perguntas de negócio: quais dispositivos concentram mais acessos? Em quais telas o tempo médio assistido é maior? Como o consumo varia ao longo dos meses?
 
-![Dashboard de streaming de filmes desenvolvido no Excel](assets/Desafio 03 - Streaming de Filmes - Excel.jpg)
+![Dashboard de streaming de filmes desenvolvido no Excel](assets/dashboard-streaming-excel.jpg)
 
 ### Indicadores principais
 
