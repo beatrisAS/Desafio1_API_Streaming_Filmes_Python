@@ -2,14 +2,15 @@
 
 # 🎬 Streaming de Filmes — Projetos de Análise de Dados
 
-**Desafio 1 · Google Sheets**  ·  **Desafio 2 · Estatística descritiva com Python**
+**Desafio 1 · Google Sheets** · **Desafio 2 · Estatística com Python** · **Desafio 3 · Excel e Dashboard**
 
-Dois desafios de análise de dados com o mesmo tema: integração de dados de filmes e análise estatística de visualizações.
+Três desafios de análise de dados com o mesmo tema: integração, estatística descritiva e visualização de indicadores de streaming de filmes.
 
 [![Python](https://img.shields.io/badge/Python-3-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![Google Colab](https://img.shields.io/badge/Google%20Colab-Notebook-F9AB00?logo=googlecolab&logoColor=white)](https://colab.research.google.com/)
 [![Google Sheets](https://img.shields.io/badge/Google%20Sheets-API-34A853?logo=googlesheets&logoColor=white)](https://developers.google.com/workspace/sheets/api)
 [![Pandas](https://img.shields.io/badge/Pandas-An%C3%A1lise-150458?logo=pandas&logoColor=white)](https://pandas.pydata.org/)
+[![Excel](https://img.shields.io/badge/Microsoft%20Excel-Dashboard-217346?logo=microsoftexcel&logoColor=white)](https://www.microsoft.com/pt-br/microsoft-365/excel)
 [![Dados fictícios](https://img.shields.io/badge/Dados-fict%C3%ADcios-9B87C4)](#dados)
 [![Abrir Desafio 1 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/beatrisAS/Desafio1_API_Streaming_Filmes_Python/blob/main/api/Desafio1_API_Python.ipynb)
 [![Abrir Desafio 2 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/beatrisAS/Desafio1_API_Streaming_Filmes_Python/blob/main/api/Desafio2_Estatistica_Python.ipynb)
@@ -20,7 +21,7 @@ Dois desafios de análise de dados com o mesmo tema: integração de dados de fi
 
 ## Sobre o projeto
 
-Este repositório reúne **dois desafios de análise de dados sobre streaming de filmes**. O primeiro pratica geração de dados fictícios e integração com uma planilha Google; o segundo analisa registros de visualização com pandas, compara dispositivos e gêneros e interpreta os resultados.
+Este repositório reúne **três desafios de análise de dados sobre streaming de filmes**, desenvolvidos no bootcamp de Analista de Dados da Generation Brasil. Os projetos exploram etapas complementares da análise: geração e integração de dados, investigação estatística e comunicação de resultados por meio de um dashboard no Excel.
 
 ### Desafio 1 — Integração com Google Sheets
 
@@ -30,7 +31,86 @@ O notebook gera **10 registros fictícios de filmes**, grava-os em uma planilha 
 
 O notebook do segundo desafio usa `filmes.csv` (dimensão) e `visualizacoes.csv` (fato) para investigar em qual dispositivo ocorre a maior proporção de visualizações não concluídas. Também compara essa proporção por gênero e analisa `tempo_assistido_min` com medidas de tendência central, dispersão, outliers, distribuição e gráficos.
 
-> **Importante:** os dois desafios têm o mesmo tema, mas usam bases e têm objetivos diferentes. O Desafio 2 utiliza os CSV fornecidos no repositório oficial do desafio, não a base pequena de 10 filmes gerada no Desafio 1. Os dados são didáticos e não representam usuários reais.
+### Desafio 3 — Relatório e dashboard no Excel
+
+O terceiro desafio explora a construção de um relatório analítico no Excel Web, com fórmulas, tabelas dinâmicas, indicadores, gráficos e segmentação por dispositivo. O objetivo é compreender o volume de visualizações, o tempo assistido e sua evolução mensal.
+
+> **Importante:** os desafios compartilham o tema, mas possuem objetivos próprios. O Desafio 2 utiliza os CSV fornecidos no repositório oficial do desafio, não a base pequena de 10 filmes gerada no Desafio 1. Os dados são didáticos e não representam usuários reais.
+
+## Desafio 3 · Dashboard de streaming no Excel
+
+### Visão geral
+
+O projeto utiliza registros fictícios de visualização para responder a perguntas de negócio: quais dispositivos concentram mais acessos? Em quais telas o tempo médio assistido é maior? Como o consumo varia ao longo dos meses?
+
+![Dashboard de streaming de filmes desenvolvido no Excel](assets/Desafio 03 - Streaming de Filmes - Excel.jpg)
+
+### Indicadores principais
+
+| Indicador | Resultado |
+| --- | ---: |
+| Total de visualizações | 55.000 |
+| Total de minutos assistidos | 5.000.899 |
+| Média de minutos por visualização | 90,9 min |
+| Dispositivo com mais visualizações | Smart TV (aprox. 40%) |
+| Maior média de tempo assistido | Tablet (92,1 min) |
+
+### Relatório por dispositivo
+
+| Dispositivo | Visualizações | Minutos assistidos | Média (min) | Participação nas visualizações (aprox.) |
+| --- | ---: | ---: | ---: | ---: |
+| Smart TV | 21.994 | 1.998.273 | 90,9 | 40% |
+| Celular | 16.503 | 1.501.129 | 91,0 | 30% |
+| Computador | 8.188 | 738.649 | 90,2 | 15% |
+| Tablet | 5.581 | 513.894 | 92,1 | 10% |
+| Console | 2.734 | 248.954 | 91,1 | 5% |
+| **Total** | **55.000** | **5.000.899** | **90,9** | **100%** |
+
+### Organização da planilha
+
+| Aba | Finalidade |
+| --- | --- |
+| `Leitura` | Contexto e orientações do exercício. |
+| `Relatorio` | Consolidação dos indicadores por dispositivo. |
+| `Dinamica` | Agregações e tabelas dinâmicas para análise. |
+| `Conferencia` | Área de conferência dos resultados. |
+| `fato` | Registros de visualização. |
+| `dimensao` | Dados descritivos dos filmes. |
+| `Dashboard` | Painel visual com indicadores, gráficos, segmentação e tabelas de apoio. |
+
+### Cálculos e recursos do Excel
+
+- **Quantidade:** contagem de `visualizacao_id`, em vez da soma dos identificadores.
+- **Tempo total:** soma de `tempo_assistido_min`.
+- **Média:** média do tempo assistido por registro; a média geral considera todos os registros, não uma média simples das médias dos dispositivos.
+- **Participação percentual:** quantidade do dispositivo dividida pelo total geral. Na estrutura do relatório, a fórmula `=B3/$B$8` é aplicada na coluna de participação e formatada como porcentagem.
+- **Evolução mensal:** soma do tempo assistido agrupada pelo campo `ano_mes`.
+
+### Visualizações do dashboard
+
+| Gráfico | Objetivo |
+| --- | --- |
+| Barras horizontais | Comparar a quantidade de visualizações por dispositivo. |
+| Colunas | Comparar a média de minutos assistidos. |
+| Pizza | Mostrar a participação percentual das visualizações por dispositivo. |
+| Linha | Acompanhar a evolução mensal do tempo assistido, de janeiro de 2025 a julho de 2026. |
+
+O painel reúne quatro tabelas dinâmicas e uma segmentação por dispositivo. A identidade visual combina grafite, vermelho, dourado e tons neutros, com ícones discretos e hierarquia de informações.
+
+> A participação percentual foi calculada sobre a quantidade de visualizações. Por isso, o título do gráfico de pizza deve indicar **Participação percentual das visualizações**, e não do tempo assistido.
+
+### Insights e recomendações
+
+- Smart TV e celular concentram aproximadamente 70% das visualizações, sendo canais relevantes para priorizar investigações sobre a experiência de uso.
+- O tablet possui a maior média de minutos assistidos, apesar de representar uma parcela menor das visualizações. A diferença entre as médias dos dispositivos é pequena e não comprova maior engajamento por si só.
+- A série mensal apresenta oscilações no consumo; o gráfico permite investigar períodos de maior e menor volume, sem atribuir causas que não estejam demonstradas na base.
+- Como aprofundamento, comparar dispositivo e gênero pode ajudar a identificar diferentes perfis de consumo.
+
+Os resultados descrevem exclusivamente uma base didática, não uma plataforma comercial real.
+
+### Como consultar o projeto
+
+Abra a planilha do Desafio 3 no Excel ou Excel Web, consulte a aba `Relatorio` e confira as agregações em `Dinamica` e os gráficos em `Dashboard`. O material de referência da atividade está no [repositório oficial do Desafio 03](https://github.com/rafaelq80/desafios_tecnicos_ad/tree/03_Desafio_03/desafio_03).
 
 ## O que você vai praticar
 
@@ -40,11 +120,14 @@ O notebook do segundo desafio usa `filmes.csv` (dimensão) e `visualizacoes.csv`
 - Carregar CSV no pandas e verificar tipos, ausências e duplicatas.
 - Comparar visualizações não concluídas por dispositivo e gênero.
 - Interpretar média, mediana, desvio padrão, outliers e distribuição do tempo assistido.
+- Consolidar indicadores no Excel, calcular participações percentuais e construir tabelas dinâmicas.
+- Comunicar resultados com gráficos, segmentação e um dashboard analítico.
 
 ## Tecnologias
 
 | Tecnologia | Uso |
 | --- | --- |
+| Microsoft Excel / Excel Web | Relatórios, fórmulas, tabelas dinâmicas, segmentação e dashboard do Desafio 3. |
 | Python 3 | Geração, organização e conferência dos dados. |
 | Google Colab | Execução do notebook e armazenamento do segredo usado na autenticação. |
 | Google Cloud | Configuração do projeto, APIs e conta de serviço. |
@@ -62,6 +145,8 @@ O notebook do segundo desafio usa `filmes.csv` (dimensão) e `visualizacoes.csv`
 ```text
 Desafio1_API_Streaming_Filmes_Python/
 ├── README.md
+├── assets/
+│   └── dashboard-streaming-excel.jpg
 └── api/
     ├── Desafio1_API_Python.ipynb
     ├── Desafio2_Estatistica_Python.ipynb
@@ -73,7 +158,10 @@ Desafio1_API_Streaming_Filmes_Python/
 | [`Desafio1_API_Python.ipynb`](api/Desafio1_API_Python.ipynb) | **Desafio 1:** preparação, autenticação, geração e conferência de registros na planilha. |
 | [`Desafio2_Estatistica_Python.ipynb`](api/Desafio2_Estatistica_Python.ipynb) | **Desafio 2:** conferência dos CSV, análise da taxa de visualizações não concluídas e estatística descritiva do tempo assistido. |
 | [`Desafio_01_Streaming_Filmes.xlsx`](api/Desafio_01_Streaming_Filmes.xlsx) | Exemplo em Excel com a aba `filmes`, o cabeçalho e 10 registros fictícios do Desafio 1. |
-| `README.md` | Documentação dos dois desafios. |
+| [`dashboard-streaming-excel.jpg`](assets/dashboard-streaming-excel.jpg) | Prévia visual do dashboard do Desafio 3. |
+| `README.md` | Documentação dos três desafios. |
+
+> A árvore acima inclui a imagem de prévia a ser adicionada ao repositório. O caminho do arquivo `.xlsx` do Desafio 3 ainda precisa ser definido após sua publicação no GitHub.
 
 > O Excel é uma cópia local de exemplo do Desafio 1. O notebook trabalha com uma planilha online do Google Sheets e não atualiza esse arquivo automaticamente.
 
@@ -148,7 +236,7 @@ Gêneros disponíveis: `ação`, `comédia`, `drama`, `terror`, `documentário`,
 
 ## Como executar
 
-O repositório contém dois notebooks com requisitos diferentes. O **Desafio 1** exige configurar uma conta de serviço e uma planilha. O **Desafio 2** roda no Colab usando os CSV baixados do repositório oficial do desafio.
+Os dois notebooks têm requisitos diferentes; o Desafio 3 utiliza o Excel. O **Desafio 1** exige configurar uma conta de serviço e uma planilha. O **Desafio 2** roda no Colab usando os CSV baixados do repositório oficial do desafio.
 
 ### Desafio 2 — Análise estatística no Colab
 
@@ -306,6 +394,8 @@ As ideias abaixo não estão implementadas no notebook atual:
 
 ## Referências
 
+- [Desafio 03 — repositório oficial](https://github.com/rafaelq80/desafios_tecnicos_ad/tree/03_Desafio_03/desafio_03)
+
 - [Documentação do Python em português](https://docs.python.org/pt-br/3/)
 - [Primeiros passos com o Google Colab](https://colab.research.google.com/)
 - [Google Sheets API](https://developers.google.com/workspace/sheets/api)
@@ -320,4 +410,3 @@ As ideias abaixo não estão implementadas no notebook atual:
 <div align="center">
   Projeto de estudo desenvolvido no contexto do bootcamp de Analista de Dados da Generation Brasil.
 </div>
-
