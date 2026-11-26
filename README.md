@@ -34,7 +34,7 @@ O notebook do segundo desafio usa `filmes.csv` (dimensão) e `visualizacoes.csv`
 
 ### Desafio 3 — Relatório e dashboard no Excel
 
-O terceiro desafio explora a construção de um relatório analítico no Excel Web, com fórmulas, tabelas dinâmicas, indicadores, gráficos e segmentação por dispositivo. O objetivo é compreender o volume de visualizações, o tempo assistido e sua evolução mensal.
+O terceiro desafio explora a construção de um relatório analítico no Excel Web, com fórmulas, tabelas dinâmicas, indicadores, gráficos e segmentação por dispositivo. O objetivo é compreender o volume de visualizações, comparar o tempo médio assistido com a duração média dos filmes e acompanhar a evolução mensal do consumo.
 
 > **Importante:** os desafios compartilham o tema, mas possuem objetivos próprios. O Desafio 2 utiliza os CSV fornecidos no repositório oficial do desafio, não a base pequena de 10 filmes gerada no Desafio 1. Os dados são didáticos e não representam usuários reais.
 
@@ -42,7 +42,11 @@ O terceiro desafio explora a construção de um relatório analítico no Excel W
 
 ### Visão geral
 
-O projeto utiliza registros fictícios de visualização para responder a perguntas de negócio: quais dispositivos concentram mais acessos? Em quais telas o tempo médio assistido é maior? Como o consumo varia ao longo dos meses?
+O projeto utiliza 55.000 registros fictícios de visualização e uma dimensão com 10.300 filmes.
+
+**Pergunta de negócio:** Qual dispositivo concentra mais visualizações e como o tempo médio assistido se compara à duração média dos filmes?
+
+**Métrica principal:** `tempo_assistido_min`. **Grupo:** `dispositivo`. **Coluna complementar:** `duracao_dim`, obtida por meio do PROCX. **Decisão:** priorizar melhorias na experiência dos dispositivos mais utilizados e investigar a diferença entre tempo assistido e duração dos filmes.
 
 <p align="center">
   <img src="assets/dashboard-streaming-excel.jpg"
@@ -64,14 +68,16 @@ O projeto utiliza registros fictícios de visualização para responder a pergun
 
 ### Relatório por dispositivo
 
-| Dispositivo | Visualizações | Minutos assistidos | Média (min) | Participação nas visualizações (aprox.) |
-| --- | ---: | ---: | ---: | ---: |
-| Smart TV | 21.994 | 1.998.273 | 90,9 | 40% |
-| Celular | 16.503 | 1.501.129 | 91,0 | 30% |
-| Computador | 8.188 | 738.649 | 90,2 | 15% |
-| Tablet | 5.581 | 513.894 | 92,1 | 10% |
-| Console | 2.734 | 248.954 | 91,1 | 5% |
-| **Total** | **55.000** | **5.000.899** | **90,9** | **100%** |
+| Dispositivo | Visualizações | Minutos assistidos | Média assistida (min) | Participação (aprox.) | Duração média dos filmes (min, aprox.) |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Smart TV | 21.994 | 1.998.273 | 90,9 | 40% | 131 |
+| Celular | 16.503 | 1.501.129 | 91,0 | 30% | 130 |
+| Computador | 8.188 | 738.649 | 90,2 | 15% | 130 |
+| Tablet | 5.581 | 513.894 | 92,1 | 10% | 131 |
+| Console | 2.734 | 248.954 | 91,1 | 5% | 130 |
+| **Total** | **55.000** | **5.000.899** | **90,9** | **100%** | — |
+
+As durações médias foram arredondadas conforme os rótulos do gráfico. A média geral da duração deve ser consultada na planilha, pois seu valor exato não está disponível na captura.
 
 ### Organização da planilha
 
@@ -81,7 +87,7 @@ O projeto utiliza registros fictícios de visualização para responder a pergun
 | `Relatorio` | Consolidação dos indicadores por dispositivo. |
 | `Dinamica` | Agregações e tabelas dinâmicas para análise. |
 | `Conferencia` | Área de conferência dos resultados. |
-| `fato` | Registros de visualização. |
+| `fato` | Registros de visualização, incluindo `duracao_dim` e `ano_mes`. |
 | `dimensao` | Dados descritivos dos filmes. |
 | `Dashboard` | Painel visual com indicadores, gráficos, segmentação e tabelas de apoio. |
 
@@ -93,16 +99,38 @@ O projeto utiliza registros fictícios de visualização para responder a pergun
 - **Participação percentual:** quantidade do dispositivo dividida pelo total geral. Na estrutura do relatório, a fórmula `=B3/$B$8` é aplicada na coluna de participação e formatada como porcentagem.
 - **Evolução mensal:** soma do tempo assistido agrupada pelo campo `ano_mes`.
 
+### Integração entre fato e dimensão com PROCX
+
+A coluna `duracao_dim` traz a duração original do filme da tabela dimensão para cada registro da tabela fato, utilizando `filme_id` como chave de relacionamento. Isso permite comparar a duração dos filmes com o tempo efetivamente assistido por dispositivo.
+
+```excel
+=PROCX([@[filme_id]];tbl_dimensao[filme_id];tbl_dimensao[duracao_min];"Sem cadastro";0)
+```
+
+No relatório, a duração média por dispositivo é calculada com:
+
+```excel
+=SEERRO(MÉDIASE(tbl_fato[dispositivo];A3;tbl_fato[duracao_dim]);"-")
+```
+
+A conferência de registros sem correspondência utiliza:
+
+```excel
+=CONT.SE(tbl_fato[duracao_dim];"Sem cadastro")
+```
+
+O resultado esperado é zero. A média geral da duração considera todos os registros numéricos (`=MÉDIA(tbl_fato[duracao_dim])`), não a média simples das médias por dispositivo.
+
 ### Visualizações do dashboard
 
 | Gráfico | Objetivo |
 | --- | --- |
 | Barras horizontais | Comparar a quantidade de visualizações por dispositivo. |
-| Colunas | Comparar a média de minutos assistidos. |
+| Colunas agrupadas | Comparar o tempo médio assistido com a duração média dos filmes por dispositivo. |
 | Pizza | Mostrar a participação percentual das visualizações por dispositivo. |
 | Linha | Acompanhar a evolução mensal do tempo assistido, de janeiro de 2025 a julho de 2026. |
 
-O painel reúne quatro tabelas dinâmicas e uma segmentação por dispositivo. A identidade visual combina grafite, vermelho, dourado e tons neutros, com ícones discretos e hierarquia de informações.
+O painel reúne quatro tabelas dinâmicas e uma segmentação por dispositivo. A tabela dinâmica de médias utiliza `dispositivo` em Linhas e as médias de `tempo_assistido_min` e `duracao_dim` em Valores. A identidade visual combina grafite, vermelho, dourado e tons neutros, com ícones discretos e hierarquia de informações.
 
 > A participação percentual foi calculada sobre a quantidade de visualizações. Por isso, o título do gráfico de pizza deve indicar **Participação percentual das visualizações**, e não do tempo assistido.
 
@@ -111,7 +139,9 @@ O painel reúne quatro tabelas dinâmicas e uma segmentação por dispositivo. A
 - Smart TV e celular concentram aproximadamente 70% das visualizações, sendo canais relevantes para priorizar investigações sobre a experiência de uso.
 - O tablet possui a maior média de minutos assistidos, apesar de representar uma parcela menor das visualizações. A diferença entre as médias dos dispositivos é pequena e não comprova maior engajamento por si só.
 - A série mensal apresenta oscilações no consumo; o gráfico permite investigar períodos de maior e menor volume, sem atribuir causas que não estejam demonstradas na base.
-- Como aprofundamento, comparar dispositivo e gênero pode ajudar a identificar diferentes perfis de consumo.
+- A duração média dos filmes fica entre aproximadamente 130 e 131 minutos por dispositivo, enquanto o tempo médio assistido varia de 90,2 a 92,1 minutos. Em todos os dispositivos, o tempo médio assistido é inferior à duração média dos filmes.
+- Maio de 2026 registrou o maior tempo assistido na série apresentada, com 274.610 minutos.
+- Recomenda-se priorizar melhorias na Smart TV e no celular e investigar a diferença entre duração e tempo assistido, sem interpretar essa diferença isoladamente como prova de abandono.
 
 Os resultados descrevem exclusivamente uma base didática, não uma plataforma comercial real.
 
@@ -132,13 +162,14 @@ Abra a planilha `.xlsx` no Excel ou Excel Web para consultar as abas, fórmulas,
 - Comparar visualizações não concluídas por dispositivo e gênero.
 - Interpretar média, mediana, desvio padrão, outliers e distribuição do tempo assistido.
 - Consolidar indicadores no Excel, calcular participações percentuais e construir tabelas dinâmicas.
+- Relacionar tabelas fato e dimensão com PROCX e tratar erros de cálculo com SEERRO.
 - Comunicar resultados com gráficos, segmentação e um dashboard analítico.
 
 ## Tecnologias
 
 | Tecnologia | Uso |
 | --- | --- |
-| Microsoft Excel / Excel Web | Relatórios, fórmulas, tabelas dinâmicas, segmentação e dashboard do Desafio 3. |
+| Microsoft Excel / Excel Web | Relatórios, PROCX, SEERRO, tabelas dinâmicas, segmentação e dashboard do Desafio 3. |
 | Python 3 | Geração, organização e conferência dos dados. |
 | Google Colab | Execução do notebook e armazenamento do segredo usado na autenticação. |
 | Google Cloud | Configuração do projeto, APIs e conta de serviço. |
@@ -416,7 +447,6 @@ As ideias abaixo não estão implementadas no notebook atual:
 ## Referências
 
 - [Desafio 03 — repositório oficial](https://github.com/rafaelq80/desafios_tecnicos_ad/tree/03_Desafio_03/desafio_03)
-
 - [Documentação do Python em português](https://docs.python.org/pt-br/3/)
 - [Primeiros passos com o Google Colab](https://colab.research.google.com/)
 - [Google Sheets API](https://developers.google.com/workspace/sheets/api)
@@ -425,9 +455,12 @@ As ideias abaixo não estão implementadas no notebook atual:
 
 ## 👩‍💻 Autoria
 
-**Beatris Antunes Silva** 
+**Beatris Antunes Silva**
+
 ---
 
 <div align="center">
+
   Projeto de estudo desenvolvido no contexto do bootcamp de Analista de Dados da Generation Brasil.
+
 </div>
