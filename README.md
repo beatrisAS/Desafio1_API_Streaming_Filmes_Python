@@ -11,6 +11,7 @@ Três desafios de análise de dados com o mesmo tema: integração, estatística
 [![Google Sheets](https://img.shields.io/badge/Google%20Sheets-API-34A853?logo=googlesheets&logoColor=white)](https://developers.google.com/workspace/sheets/api)
 [![Pandas](https://img.shields.io/badge/Pandas-An%C3%A1lise-150458?logo=pandas&logoColor=white)](https://pandas.pydata.org/)
 [![Excel](https://img.shields.io/badge/Microsoft%20Excel-Dashboard-217346?logo=microsoftexcel&logoColor=white)](https://www.microsoft.com/pt-br/microsoft-365/excel)
+[![Desafio 3 — Excel](https://img.shields.io/badge/Desafio%203-Baixar%20Excel-217346?logo=microsoftexcel&logoColor=white)](api/Desafio_03_Streaming_Filmes.xlsx)
 [![Dados fictícios](https://img.shields.io/badge/Dados-fict%C3%ADcios-9B87C4)](#dados)
 [![Abrir Desafio 1 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/beatrisAS/Desafio1_API_Streaming_Filmes_Python/blob/main/api/Desafio1_API_Python.ipynb)
 [![Abrir Desafio 2 no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/beatrisAS/Desafio1_API_Streaming_Filmes_Python/blob/main/api/Desafio2_Estatistica_Python.ipynb)
@@ -116,7 +117,11 @@ Os resultados descrevem exclusivamente uma base didática, não uma plataforma c
 
 ### Como consultar o projeto
 
-Abra a planilha do Desafio 3 no Excel ou Excel Web, consulte a aba `Relatorio` e confira as agregações em `Dinamica` e os gráficos em `Dashboard`. O material de referência da atividade está no [repositório oficial do Desafio 03](https://github.com/rafaelq80/desafios_tecnicos_ad/tree/03_Desafio_03/desafio_03).
+- [Acessar a planilha completa do Desafio 3 (Excel)](api/Desafio_03_Streaming_Filmes.xlsx)
+- [Visualizar o dashboard desenvolvido no Excel](assets/dashboard-streaming-excel.jpg)
+- [Consultar o repositório oficial do Desafio 03](https://github.com/rafaelq80/desafios_tecnicos_ad/tree/03_Desafio_03/desafio_03)
+
+Abra a planilha `.xlsx` no Excel ou Excel Web para consultar as abas, fórmulas, tabelas dinâmicas, gráficos e segmentações. A imagem apresenta uma prévia do dashboard.
 
 ## O que você vai praticar
 
@@ -156,7 +161,8 @@ Desafio1_API_Streaming_Filmes_Python/
 └── api/
     ├── Desafio1_API_Python.ipynb
     ├── Desafio2_Estatistica_Python.ipynb
-    └── Desafio_01_Streaming_Filmes.xlsx
+    ├── Desafio_01_Streaming_Filmes.xlsx
+    └── Desafio_03_Streaming_Filmes.xlsx
 ```
 
 | Arquivo | Descrição |
@@ -164,10 +170,11 @@ Desafio1_API_Streaming_Filmes_Python/
 | [`Desafio1_API_Python.ipynb`](api/Desafio1_API_Python.ipynb) | **Desafio 1:** preparação, autenticação, geração e conferência de registros na planilha. |
 | [`Desafio2_Estatistica_Python.ipynb`](api/Desafio2_Estatistica_Python.ipynb) | **Desafio 2:** conferência dos CSV, análise da taxa de visualizações não concluídas e estatística descritiva do tempo assistido. |
 | [`Desafio_01_Streaming_Filmes.xlsx`](api/Desafio_01_Streaming_Filmes.xlsx) | Exemplo em Excel com a aba `filmes`, o cabeçalho e 10 registros fictícios do Desafio 1. |
+| [`Desafio_03_Streaming_Filmes.xlsx`](api/Desafio_03_Streaming_Filmes.xlsx) | **Desafio 3:** planilha Excel com relatório, fórmulas, tabelas dinâmicas, gráficos e dashboard interativo. |
 | [`dashboard-streaming-excel.jpg`](assets/dashboard-streaming-excel.jpg) | Prévia visual do dashboard do Desafio 3. |
 | `README.md` | Documentação dos três desafios. |
 
-> A árvore acima inclui a imagem de prévia a ser adicionada ao repositório. O caminho do arquivo `.xlsx` do Desafio 3 ainda precisa ser definido após sua publicação no GitHub.
+> O Desafio 3 é disponibilizado em formato `.xlsx`, acompanhado de uma imagem de prévia do dashboard.
 
 > O Excel é uma cópia local de exemplo do Desafio 1. O notebook trabalha com uma planilha online do Google Sheets e não atualiza esse arquivo automaticamente.
 
@@ -238,11 +245,19 @@ Gêneros disponíveis: `ação`, `comédia`, `drama`, `terror`, `documentário`,
 - Os nomes são gerados pelo Faker em português do Brasil; semelhanças com pessoas reais são coincidência.
 - `Faker.seed(42)` e `random.seed(42)` favorecem a reprodutibilidade. Versões diferentes das bibliotecas ou do ambiente podem alterar os resultados.
 - Os IDs de 1 a 10 recomeçam em cada execução e não são automaticamente únicos entre execuções.
-- O arquivo Excel é apenas uma amostra de uma execução; não está sincronizado com a planilha online.
+- O arquivo Excel do Desafio 1 é apenas uma amostra de uma execução; não está sincronizado com a planilha online. A planilha do Desafio 3 reúne o relatório e o dashboard.
 
 ## Como executar
 
 Os dois notebooks têm requisitos diferentes; o Desafio 3 utiliza o Excel. O **Desafio 1** exige configurar uma conta de serviço e uma planilha. O **Desafio 2** roda no Colab usando os CSV baixados do repositório oficial do desafio.
+
+### Desafio 3 — Consulta dos dados no Excel
+
+1. Baixe o arquivo [Desafio_03_Streaming_Filmes.xlsx](api/Desafio_03_Streaming_Filmes.xlsx).
+2. Abra a planilha no Excel ou Excel Web e consulte as abas `Relatorio`, `Dinamica`, `Conferencia` e `Dashboard`.
+3. Consulte a [imagem do dashboard](assets/dashboard-streaming-excel.jpg) para visualizar o resultado do projeto.
+
+> Utilize o arquivo `.xlsx` para explorar os gráficos e as segmentações do painel.
 
 ### Desafio 2 — Análise estatística no Colab
 
